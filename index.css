@@ -1,0 +1,66 @@
+body{
+    background-color: rgb(248, 243, 243);
+    color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+#container{
+    background-color: rgb(3, 63, 33);
+    padding: 20px;
+    border: 5px solid rgb(7, 240, 123);
+    border-radius: 10px;
+    
+}
+
+span{
+    color: rgb(7, 240, 123);
+}
+
+button{
+    display: block;
+    background-color: rgb(4, 253, 129);
+    color: rgb(247, 250, 252);
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#password-1, #password-2{
+    display: inline;
+    font-size: 20px;
+    align-items: center;
+    margin: 30px 5px 20px 5px;
+    padding: 5px;
+    color: rgb(6, 240, 57);
+    border: 2px solid rgb(242, 245, 243);
+    border-radius: 5px;
+
+}
+
+#sub-container{
+    display: flex;
+    flex-direction: column;
+}
+
+#copyBtnOne, #copyBtnTwo{
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+#emmilee-footer{
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+#emmilee{
+    text-decoration: underline;
+    font-weight: bold;
+}

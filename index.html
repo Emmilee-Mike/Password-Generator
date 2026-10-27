@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+
+    <div id="container">
+      <h1>
+        Generate a <br />
+        <span>random password</span>
+      </h1>
+
+      <h4>Never use an insecure password again</h4>
+      <button id="generate" onclick="generatePassword()"> Generate Password</button>
+
+         <div class="length-container">
+           <label for="lengthSlider">Password Length: <span id="lengthVal">10</span></label>
+           <input type="range" id="lengthSlider" min="6" max="25" value="10" />
+         </div>
+
+      <div id="sub-container"> 
+         <div class="password-box">
+            <p id="passwordOne"></p>
+            <p id="password-1"></p>
+            <button id="copyBtnOne">Copy</button>
+          </div>
+
+           <div class="password-box">
+             <p id="passwordTwo"></p>
+             <p id="password-2"></p>
+             <button id="copyBtnTwo">Copy</button>
+           </div> 
+      </div>
+      <h5 id="emmilee-footer">Built By <span id="emmilee">Emmilee</span></h5>
+    </div>
+  </body>
+</html>
