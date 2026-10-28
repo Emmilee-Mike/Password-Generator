@@ -5,8 +5,8 @@ const lengthSlider = document.getElementById("lengthSlider");
 const lengthVal = document.getElementById("lengthVal");
 const copyBtnOne = document.getElementById("copyBtnOne");
 const copyBtnTwo = document.getElementById("copyBtnTwo");
-let passwordOne = document.getElementById("password-1")
-let passwordTwo = document.getElementById("password-2")
+const passwordOne = document.getElementById("password-1")
+const passwordTwo = document.getElementById("password-2")
 
 
 lengthSlider.addEventListener("input", function() {
