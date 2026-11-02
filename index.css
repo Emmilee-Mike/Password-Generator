@@ -1,66 +1,811 @@
-body{
-    background-color: rgb(56, 50, 50);
-    color: aliceblue;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    font-weight: bold;
-    box-sizing: border-box;
+/* ==============================
+   1. DESIGN TOKENS & RESET
+================================ */
+
+:root {
+  color-scheme: dark;
+
+  --bg: #080f1e;
+  --surface: #101a2d;
+  --surface-raised: #152239;
+  --border: #263750;
+
+  --blue: #4d8dff;
+  --blue-bright: #70a7ff;
+  --blue-glow: rgba(77, 141, 255, 0.18);
+
+  --text: #f2f6ff;
+  --muted: #93a3bd;
+  --success: #49dcb1;
+
+  --radius-lg: 20px;
+  --radius-md: 12px;
 }
 
-#container{
-    background-color: rgb(3, 63, 33);
-    padding: 20px;
-    border: 5px solid rgb(7, 240, 123);
-    border-radius: 10px;
-    
+* {
+  box-sizing: border-box;
 }
 
-span{
-    color: rgb(7, 240, 123);
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
 }
 
-button{
-    display: block;
-    background-color: rgb(4, 253, 129);
-    color: rgb(247, 250, 252);
-    border: none;
-    padding: 10px 20px;
-    margin-bottom: 50px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 48px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(circle at 50% 0%, rgba(43, 94, 174, 0.19), transparent 42%),
+    var(--bg);
+
+  color: var(--text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-#password-1, #password-2{
-    display: inline;
-    font-size: 20px;
-    align-items: center;
-    margin: 30px 5px 20px 5px;
-    padding: 5px;
-    color: rgb(6, 240, 57);
-    border: 2px solid rgb(242, 245, 243);
-    border-radius: 5px;
-
+button,
+input {
+  font: inherit;
 }
 
-#sub-container{
-    display: flex;
-    flex-direction: column;
+button {
+  -webkit-tap-highlight-color: transparent;
 }
 
-#copyBtnOne, #copyBtnTwo{
-    margin-top: 30px;
-    margin-bottom: 50px;
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--blue-bright);
+  outline-offset: 4px;
 }
 
-#emmilee-footer{
-    text-align: center;
-    margin-bottom: 0px;
+::selection {
+  background: var(--blue);
+  color: #ffffff;
 }
 
-#emmilee{
-    text-decoration: underline;
-    font-weight: bold;
+/* ==============================
+   2. MAIN APP CONTAINER
+================================ */
+
+#container {
+  width: 100%;
+  max-width: 760px;
+  padding: clamp(22px, 5vw, 42px);
+
+  background: rgba(16, 26, 45, 0.96);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.32),
+    0 0 50px rgba(77, 141, 255, 0.05);
+}
+
+/* ==============================
+   3. HEADER & BRAND
+================================ */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+
+  color: var(--text);
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  background: linear-gradient(135deg, #70a7ff, #2865d9);
+  border-radius: 11px;
+
+  color: #ffffff;
+  font-size: 21px;
+  font-weight: 800;
+
+  box-shadow: 0 5px 20px var(--blue-glow);
+}
+
+.brand-name {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.brand-dot {
+  color: var(--blue-bright);
+}
+
+.security-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 7px 11px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+
+  background: var(--success);
+  border-radius: 50%;
+}
+
+/* ==============================
+   4. HERO SECTION
+================================ */
+
+.hero {
+  padding: 36px 0 30px;
+}
+
+.eyebrow,
+.panel-label {
+  margin: 0 0 12px;
+
+  color: var(--blue-bright);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+h1 {
+  margin: 0;
+
+  font-size: clamp(34px, 6vw, 50px);
+  font-weight: 750;
+  line-height: 1.12;
+  letter-spacing: -1.8px;
+}
+
+h1 span {
+  color: var(--blue-bright);
+}
+
+.hero-description {
+  max-width: 490px;
+  margin: 18px 0 0;
+
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* ==============================
+   5. GENERATOR PANEL
+================================ */
+
+.generator-panel {
+  padding: clamp(18px, 4vw, 28px);
+
+  background: #0b1425;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 28px;
+}
+
+.panel-label {
+  margin-bottom: 5px;
+  font-size: 9px;
+}
+
+h2 {
+  margin: 0;
+
+  font-size: clamp(18px, 3vw, 22px);
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+.lock-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--blue-glow);
+  border: 1px solid rgba(77, 141, 255, 0.25);
+  border-radius: 12px;
+
+  color: var(--blue-bright);
+  font-size: 24px;
+}
+
+/* ==============================
+   6. PASSWORD LENGTH SLIDER
+================================ */
+
+.length-container {
+  margin-bottom: 24px;
+}
+
+.length-container label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  margin-bottom: 18px;
+
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.length-value {
+  color: var(--blue-bright);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#lengthSlider {
+  width: 100%;
+  height: 6px;
+  display: block;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background: var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  accent-color: var(--blue);
+}
+
+#lengthSlider::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background: var(--blue-bright);
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+
+  box-shadow: 0 0 0 5px var(--blue-glow);
+}
+
+#lengthSlider::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+
+  background: var(--blue-bright);
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+
+  box-shadow: 0 0 0 5px var(--blue-glow);
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 10px;
+
+  color: var(--muted);
+  font-size: 10px;
+}
+
+/* ==============================
+   7. GENERATE BUTTON
+================================ */
+
+#generate {
+  width: 100%;
+  min-height: 52px;
+  padding: 13px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background: linear-gradient(110deg, #3679ef, #5796ff);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 750;
+
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+#generate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 25px var(--blue-glow);
+  filter: brightness(1.08);
+}
+
+#generate:active {
+  transform: translateY(0);
+}
+
+/* ==============================
+   8. PASSWORD RESULTS
+================================ */
+
+.results-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  margin: 30px 0 14px;
+}
+
+h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.results-heading > span {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+#sub-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.password-box {
+  min-width: 0;
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.password-box:hover {
+  border-color: #3b5c88;
+  transform: translateY(-2px);
+}
+
+.password-card-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  margin-bottom: 14px;
+}
+
+.password-number {
+  color: var(--blue-bright);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.password-status {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.password-output {
+  min-height: 68px;
+  margin: 0 0 16px;
+  padding: 12px 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  background: #09111f;
+  border: 1px solid #253650;
+  border-radius: 8px;
+
+  color: var(--success);
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.copy-button {
+  width: 100%;
+  min-height: 40px;
+  padding: 9px 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: var(--surface-raised);
+  border: 1px solid #31445f;
+  border-radius: 8px;
+
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.copy-button:hover {
+  background: #1b2c46;
+  border-color: var(--blue);
+}
+
+/* ==============================
+   9. PRIVACY NOTE & FOOTER
+================================ */
+
+.privacy-note {
+  margin: 22px 0 0;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.privacy-note span {
+  color: var(--blue-bright);
+  font-size: 16px;
+}
+
+#emmilee-footer {
+  margin-top: 28px;
+  text-align: center;
+}
+
+#emmilee-footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+#emmilee {
+  color: var(--blue-bright);
+  font-weight: 800;
+}
+
+#emmilee-footer .footer-caption {
+  margin-top: 4px;
+  color: #667791;
+  font-size: 10px;
+}
+
+/* ==============================
+   10. RESPONSIVE LAYOUT
+================================ */
+
+@media (max-width: 560px) {
+  body {
+    align-items: flex-start;
+    padding: 18px 12px;
+  }
+
+  #container {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  .app-header {
+    padding-bottom: 20px;
+  }
+
+  .security-badge {
+    font-size: 9px;
+    padding: 6px 8px;
+  }
+
+  .hero {
+    padding: 28px 0 24px;
+  }
+
+  h1 {
+    letter-spacing: -1.2px;
+  }
+
+  .hero-description {
+    font-size: 13px;
+  }
+
+  .generator-panel {
+    padding: 17px 13px;
+  }
+
+  .password-output {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  #sub-container {
+    grid-template-columns: 1fr;
+  }
+
+  .password-box {
+    padding: 15px;
+  }
+
+  .password-output {
+    min-height: 54px;
+    font-size: 14px;
+  }
+
+  #emmilee-footer {
+    margin-top: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ==============================
+   STAGE 2: CHARACTER OPTIONS
+================================ */
+
+.options-container {
+  margin-top: 28px;
+}
+
+.options-heading h3 {
+  font-size: 14px;
+}
+
+.options-heading p {
+  margin: 5px 0 16px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.character-options {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.option-card {
+  min-width: 0;
+  min-height: 70px;
+  padding: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.option-card:hover {
+  border-color: #466a9b;
+}
+
+.option-card:has(input:checked) {
+  background: rgba(77, 141, 255, 0.08);
+  border-color: rgba(77, 141, 255, 0.65);
+}
+
+.option-card input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.custom-checkbox {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+
+  display: grid;
+  place-items: center;
+
+  background: #09111f;
+  border: 1px solid #52647d;
+  border-radius: 5px;
+}
+
+.option-card input:checked + .custom-checkbox {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.option-card input:checked + .custom-checkbox::after {
+  content: "✓";
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.option-card input:focus-visible + .custom-checkbox {
+  outline: 3px solid var(--blue-bright);
+  outline-offset: 3px;
+}
+
+.option-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.option-copy strong {
+  color: var(--text);
+  font-size: 12px;
+}
+
+.option-copy small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.option-error {
+  margin: 12px 0 0;
+  color: #ff9caa;
+  font-size: 12px;
+}
+
+.option-error[hidden] {
+  display: none;
+}
+
+@media (max-width: 360px) {
+  .character-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==============================
+   STAGE 3: PASSWORD STRENGTH
+================================ */
+
+.strength-container {
+  margin-top: 14px;
+  width: 100%;
+}
+
+.strength-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 9px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+#strength-label-1,
+#strength-label-2 {
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.strength-track {
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  background: #263449;
+  border-radius: 999px;
+}
+
+.strength-bar {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  transition:
+    width 250ms ease,
+    background-color 250ms ease;
+}
+
+.strength-bar.weak {
+  background: #ff5c70;
+}
+
+.strength-bar.medium {
+  background: #ffbd4a;
+}
+
+.strength-bar.strong {
+  background: #4d8dff;
+}
+
+.strength-bar.very-strong {
+  background: #39d98a;
 }

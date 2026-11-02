@@ -3,40 +3,243 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Password Generator</title>
+
+    <meta
+      name="description"
+      content="Generate random passwords with customizable length using the Emmilee Password Generator."
+    />
+
+    <meta name="theme-color" content="#080f1e" />
+
+    <title>Password Generator | Emmilee</title>
+
     <link rel="stylesheet" href="index.css" />
     <script src="index.js" defer></script>
   </head>
+
   <body>
+    <main id="container">
+      <header class="app-header">
+        <a class="brand" href="#" aria-label="Emmilee Password Generator home">
+          <span class="brand-mark">E</span>
+          <span class="brand-name"
+            >EMMILEE<span class="brand-dot">.</span></span
+          >
+        </a>
 
-    <div id="container">
-      <h1>
-        Generate a <br />
-        <span>random password</span>
-      </h1>
+        <span class="security-badge">
+          <span class="status-dot"></span>
+          PASSWORD TOOL
+        </span>
+      </header>
 
-      <h4>Never use an insecure password again</h4>
-      <button id="generate" onclick="generatePassword()"> Generate Password</button>
+      <section class="hero">
+        <p class="eyebrow">YOUR DIGITAL SECURITY STARTS HERE</p>
 
-         <div class="length-container">
-           <label for="lengthSlider">Password Length: <span id="lengthVal">10</span></label>
-           <input type="range" id="lengthSlider" min="6" max="25" value="10" />
-         </div>
+        <h1>
+          Create stronger<br />
+          <span>passwords.</span>
+        </h1>
 
-      <div id="sub-container"> 
-         <div class="password-box">
-            <p id="passwordOne"></p>
-            <p id="password-1"></p>
-            <button id="copyBtnOne">Copy</button>
+        <p class="hero-description">
+          Generate random passwords for your accounts in seconds. Simple, fast,
+          and designed with security in mind.
+        </p>
+      </section>
+
+      <section class="generator-panel" aria-labelledby="generator-title">
+        <div class="section-heading">
+          <div>
+            <p class="panel-label">PASSWORD GENERATOR</p>
+            <h2 id="generator-title">Create your passwords</h2>
           </div>
 
-           <div class="password-box">
-             <p id="passwordTwo"></p>
-             <p id="password-2"></p>
-             <button id="copyBtnTwo">Copy</button>
-           </div> 
-      </div>
-      <h5 id="emmilee-footer">Built By <span id="emmilee">Emmilee</span></h5>
-    </div>
+          <span class="lock-icon" aria-hidden="true">✳</span>
+        </div>
+
+        <div class="length-container">
+          <label for="lengthSlider">
+            Password length
+            <span class="length-value">
+              <span id="lengthVal">10</span> characters
+            </span>
+          </label>
+
+          <input
+            type="range"
+            id="lengthSlider"
+            min="6"
+            max="25"
+            value="10"
+            aria-valuetext="10 characters"
+          />
+
+          <div class="slider-labels">
+            <span>6 characters</span>
+            <span>25 characters</span>
+          </div>
+        </div>
+
+        <div class="options-container">
+          <div class="options-heading">
+            <h3>Customize your password</h3>
+            <p>Choose the characters you want to include.</p>
+          </div>
+
+          <fieldset class="character-options">
+            <legend class="sr-only">Character types</legend>
+
+            <label class="option-card" for="uppercase">
+              <input type="checkbox" id="uppercase" checked />
+              <span class="custom-checkbox" aria-hidden="true"></span>
+              <span class="option-copy">
+                <strong>Uppercase</strong>
+                <small>A–Z</small>
+              </span>
+            </label>
+
+            <label class="option-card" for="lowercase">
+              <input type="checkbox" id="lowercase" checked />
+              <span class="custom-checkbox" aria-hidden="true"></span>
+              <span class="option-copy">
+                <strong>Lowercase</strong>
+                <small>a–z</small>
+              </span>
+            </label>
+
+            <label class="option-card" for="numbers">
+              <input type="checkbox" id="numbers" checked />
+              <span class="custom-checkbox" aria-hidden="true"></span>
+              <span class="option-copy">
+                <strong>Numbers</strong>
+                <small>0–9</small>
+              </span>
+            </label>
+
+            <label class="option-card" for="symbols">
+              <input type="checkbox" id="symbols" checked />
+              <span class="custom-checkbox" aria-hidden="true"></span>
+              <span class="option-copy">
+                <strong>Symbols</strong>
+                <small>! @ # $ %</small>
+              </span>
+            </label>
+          </fieldset>
+
+          <p id="optionError" class="option-error" role="alert" hidden></p>
+        </div>
+
+        <button id="generate" type="button" onclick="generatePassword()">
+          <span>Generate passwords</span>
+          <span aria-hidden="true">↗</span>
+        </button>
+
+        <div class="results-heading">
+          <h3>Your generated passwords</h3>
+          <span>2 OPTIONS</span>
+        </div>
+
+        <div id="sub-container">
+          <article class="password-box">
+            <div class="password-card-heading">
+              <span class="password-number">OPTION 01</span>
+              <span class="password-status">Generated password</span>
+            </div>
+
+            <p
+              id="password-1"
+              class="password-output"
+              aria-label="First generated password"
+            ></p>
+
+            <div class="strength-container">
+              <div class="strength-info">
+                <span>Estimated password strength</span>
+                <span id="strength-label-1" aria-live="polite"
+                  >Not generated</span
+                >
+              </div>
+
+              <div
+                class="strength-track"
+                role="progressbar"
+                aria-label="Password 1 strength"
+                aria-valuemin="0"
+                aria-valuemax="6"
+                aria-valuenow="0"
+                id="strength-progress-1"
+              >
+                <div id="strength-bar-1" class="strength-bar"></div>
+              </div>
+            </div>
+
+            <button
+              id="copyBtnOne"
+              class="copy-button"
+              type="button"
+              aria-label="Copy password option one"
+            >
+              <span aria-hidden="true">▣</span>
+              Copy
+            </button>
+          </article>
+
+          <article class="password-box">
+            <div class="password-card-heading">
+              <span class="password-number">OPTION 02</span>
+              <span class="password-status">Generated password</span>
+            </div>
+
+            <p
+              id="password-2"
+              class="password-output"
+              aria-label="Second generated password"
+            ></p>
+
+            <div class="strength-container">
+              <div class="strength-info">
+                <span>Estimated password strength</span>
+                <span id="strength-label-2" aria-live="polite"
+                  >Not generated</span
+                >
+              </div>
+
+              <div
+                class="strength-track"
+                role="progressbar"
+                aria-label="Password 2 strength"
+                aria-valuemin="0"
+                aria-valuemax="6"
+                aria-valuenow="0"
+                id="strength-progress-2"
+              >
+                <div id="strength-bar-2" class="strength-bar"></div>
+              </div>
+            </div>
+
+            <button
+              id="copyBtnTwo"
+              class="copy-button"
+              type="button"
+              aria-label="Copy password option two"
+            >
+              <span aria-hidden="true">▣</span>
+              Copy
+            </button>
+          </article>
+        </div>
+
+        <p class="privacy-note">
+          <span aria-hidden="true">◇</span>
+          Generate passwords locally in your browser. Never share your
+          passwords.
+        </p>
+      </section>
+
+      <footer id="emmilee-footer">
+        <p>Built by <span id="emmilee">Emmilee</span></p>
+        <p class="footer-caption">A personal JavaScript project</p>
+      </footer>
+    </main>
   </body>
 </html>
