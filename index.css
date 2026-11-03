@@ -339,6 +339,7 @@ h2 {
   width: 100%;
   min-height: 52px;
   padding: 13px 18px;
+  margin-top: 20px;
 
   display: flex;
   align-items: center;
@@ -468,10 +469,16 @@ h3 {
   text-align: center;
 }
 
+.password-output {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .copy-button {
   width: 100%;
   min-height: 40px;
   padding: 9px 12px;
+  margin-top: 5px;
 
   display: flex;
   align-items: center;
@@ -580,10 +587,6 @@ h3 {
     padding: 17px 13px;
   }
 
-  .password-output {
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
   #sub-container {
     grid-template-columns: 1fr;
   }

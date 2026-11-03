@@ -2,38 +2,8 @@ const characterSets = {
   uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   lowercase: "abcdefghijklmnopqrstuvwxyz",
   numbers: "0123456789",
-  symbols: [
-    "!",
-    "@",
-    "#",
-    "$",
-    "%",
-    "^",
-    "&",
-    "*",
-    "(",
-    ")",
-    "_",
-    "-",
-    "+",
-    "=",
-    "{",
-    "[",
-    "}",
-    "]",
-    ",",
-    ".",
-    "/",
-    ":",
-    ";",
-    "<",
-    ">",
-    "?",
-    "~",
-    "`",
-    "|",
-  ].join(""),
-};
+  symbols: [ "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "-", "+", "=", "{", "[", "}", "]",
+            ",", ".", "/", ":", ";", "<", ">", "?", "~", "`", "|",  ].join(""),};
 
 const lengthSlider = document.getElementById("lengthSlider");
 const lengthVal = document.getElementById("lengthVal");
@@ -65,6 +35,11 @@ lengthSlider.addEventListener("input", () => {
 });
 
 function getRandomIndex(max) {
+  // Validate the maximum value.
+  if (!Number.isSafeInteger(max) || max <= 0) {
+    throw new RangeError("Maximum must be a positive integer.");
+  }
+
   const range = 2 ** 32;
   const limit = Math.floor(range / max) * max;
   const randomNumber = new Uint32Array(1);
@@ -111,9 +86,6 @@ function generatePassword() {
   optionError.hidden = true;
 
   const characters = selectedCharacters.join("");
-  const requiredCharacters = selectedCharacters.map((set) => {
-    return set[getRandomIndex(set.length)];
-  });
   const passwordLength = Number(lengthSlider.value);
 
   const minLength = Number(lengthSlider.min);
@@ -130,19 +102,20 @@ function generatePassword() {
     return;
   }
 
-  if (passwordLength < requiredCharacters.length) {
+  if (passwordLength < selectedCharacters.length) {
     optionError.textContent =
       "Password length must be at least the number of selected character types.";
 
     optionError.hidden = false;
     return;
   }
-
   passwordOne.textContent = "";
   passwordTwo.textContent = "";
 
   const generateSinglePassword = () => {
-    const passwordCharacters = [...requiredCharacters];
+    const passwordCharacters = selectedCharacters.map((set) => {
+      return set[getRandomIndex(set.length)];
+    });
 
     while (passwordCharacters.length < passwordLength) {
       const randomIndex = getRandomIndex(characters.length);
